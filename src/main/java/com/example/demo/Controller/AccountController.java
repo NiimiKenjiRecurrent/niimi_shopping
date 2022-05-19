@@ -49,4 +49,24 @@ public class AccountController {
 		return mv;
 	}
 	
+	@RequestMapping(value="signup",method = RequestMethod.POST)
+	public ModelAndView signup(ModelAndView mv,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("tell") int tell,
+			@RequestParam("addressNumFront") int addressNumFront,
+			@RequestParam("addressNumBack") int addressNumBack,
+			@RequestParam("prefectures") String prefectures,
+			@RequestParam("town")String town,
+			@RequestParam("addrNum")String addrNum,
+			@RequestParam("apart") String apart,
+			@RequestParam("userName") String userName,
+			@RequestParam("password") String password,
+			@RequestParam("passwordCon") String passwordCon) {
+		
+		
+		
+		mv.setViewName("account/index");
+		return mv;
+	}
 }
