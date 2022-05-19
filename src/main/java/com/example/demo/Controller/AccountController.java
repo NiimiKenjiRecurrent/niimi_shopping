@@ -53,9 +53,9 @@ public class AccountController {
 	public ModelAndView signup(ModelAndView mv,
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
-			@RequestParam("tell") int tell,
-			@RequestParam("addressNumFront") int addressNumFront,
-			@RequestParam("addressNumBack") int addressNumBack,
+			@RequestParam("tell") String tell,
+			@RequestParam("addressNumFront") String addressNumFront,
+			@RequestParam("addressNumBack") String addressNumBack,
 			@RequestParam("prefectures") String prefectures,
 			@RequestParam("town")String town,
 			@RequestParam("addrNum")String addrNum,
@@ -64,8 +64,9 @@ public class AccountController {
 			@RequestParam("password") String password,
 			@RequestParam("passwordCon") String passwordCon) {
 		
-		
-		
+		String addressNum = addressNumFront + addressNumBack;
+		String address = prefectures + town + addrNum + apart;
+		//FIXME データベースに登録
 		mv.setViewName("account/index");
 		return mv;
 	}
