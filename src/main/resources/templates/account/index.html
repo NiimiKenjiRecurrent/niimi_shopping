@@ -6,7 +6,8 @@
 </head>
 <body>
 	<h3>Login</h3>
-	<span th:text="${message}" style="color:red"></span>
+	<span th:text="${loginmessage}" style="color:red"></span>
+	<span th:text="${nullmessage}" style="color:red"></span>
 	<form action="/login" method="post">
 		<p>E-mail<input type="text" name="email" placeholder="～～～@～.～.～"></p>
 		<p>PassWord<input type="text" name="password" placeholder="正規条件表記"></p>

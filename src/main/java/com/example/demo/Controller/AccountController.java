@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +37,19 @@ public class AccountController {
 		
 		//未入力チェック
 		if(email==null||email.length()==0) {
-			mv.addObject("message","未入力");
+			mv.addObject("nullmessage","未入力");
 			mv.setViewName("account/index");
+		// ok
 		}else {
-			// ok
+			List<Account> accountList = accountRepository.findByEmail(email);
+			//ログイン失敗チェック
+			if(accountList.get(0).getEmail().equals(email)&&accountList.get(0).getPassword().equals(password)) {
+				mv.setViewName("item/showItem");
+			}else {
+				mv.addObject("loginmessage","一致するものが見つかりませんでした");
+				mv.setViewName("account/index");
+			}
 			session.setAttribute("name", email);
-			mv.setViewName("item/showItem");
 		}
 		return mv;
 	}
