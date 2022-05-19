@@ -24,7 +24,7 @@ public class Account {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "tell")
+	@Column(name = "tel")
 	private String tell;
 	
 	@Column(name = "name")
@@ -33,13 +33,25 @@ public class Account {
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "address_num")
+	@Column(name = "addressnum")
 	private String addressNum;
 
 	public Account() {
 		super();
 	}
 	
+	public Account(String userName, String address, String email, String tell, String name, String password,
+			String addressNum) {
+		super();
+		this.userName = userName;
+		this.address = address;
+		this.email = email;
+		this.tell = tell;
+		this.name = name;
+		this.password = password;
+		this.addressNum = addressNum;
+	}
+
 	public Account(Integer id, String userName, String address, String email, String tell, String name, String password,
 			String addressNum) {
 		super();

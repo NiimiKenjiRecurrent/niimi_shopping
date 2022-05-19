@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.Entity.Account;
+import com.example.demo.Repository.AccountRepository;
+
 
 @Controller
 public class AccountController {
 	@Autowired
 	HttpSession session;
 	
-//	@Autowired
-//	AccountRepository accountRepository;
+	@Autowired
+	AccountRepository accountRepository;
 
 	
 	@RequestMapping("/")
@@ -63,10 +66,13 @@ public class AccountController {
 			@RequestParam("userName") String userName,
 			@RequestParam("password") String password,
 			@RequestParam("passwordCon") String passwordCon) {
-		
 		String addressNum = addressNumFront + addressNumBack;
 		String address = prefectures + town + addrNum + apart;
-		//FIXME データベースに登録
+		
+		// データベースに登録
+		Account account =new Account(userName, address, email, tell, name, password,addressNum);
+		accountRepository.saveAndFlush(account);
+
 		mv.setViewName("account/index");
 		return mv;
 	}
