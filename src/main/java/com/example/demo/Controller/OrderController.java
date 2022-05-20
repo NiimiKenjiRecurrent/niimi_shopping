@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.ItemRepository;
 import com.example.demo.Repository.OrderRepository;
+import com.example.demo.Repository.PayRepository;
 
 @Controller
 public class OrderController {
@@ -24,6 +25,9 @@ public class OrderController {
 	
 	@Autowired
 	OrderRepository orderRepository;
+	
+	@Autowired
+	PayRepository payRepository;
 
 	@RequestMapping("/order")
 	public ModelAndView order(ModelAndView mv) {
