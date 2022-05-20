@@ -2,9 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Topページ</title>
 </head>
 <body>
-aaaaaaaaaaaaaaaaaaaaaaaa
+	<a href="cart">カートへ</a>
+	<!-- メニュー -->
+	<nav class="wrapper">
+        <ul class="menu">
+          <li><a href="#">カテゴリ</a></li>
+          <li><a href="#">作れたら</a></li>
+          <li><a href="#">ここを</a></li>
+          <li><a href="#">弄ろうと</a></li>
+          <li><a href="#">思って</a></li>
+          <li><a href="#">ます。</a></li>
+        </ul>
+    </nav>
+    
+    <form action="/search" method="post">
+    	<p><input type="text" name="searchWord"><input type="submit" value="検索"></p>
+    </form>
+    
+    <div th:each="item:${items}">
+    	<table border="1">
+    		<tr>
+    			<td rowspan="2" th:text="${item.image}"></td>
+    			<td th:text="${item.name}"></td>
+    			<td th:text="${item.price}"></td>
+    		</tr>
+    		<tr>
+    			<td>    			
+ 					<a th:href="|/cart/add/${item.id}|">カートに追加</a>
+     			</td>
+    			<td>    			
+ 					<a th:href="|/item/detail/${item.id}|">もっと見る</a>
+    			</td>
+    		</tr>
+    	</table>
+    </div>
 </body>
 </html>

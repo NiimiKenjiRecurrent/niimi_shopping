@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Entity.Account;
+import com.example.demo.Entity.Item;
 import com.example.demo.Repository.AccountRepository;
+import com.example.demo.Repository.ItemRepository;
 
 
 @Controller
@@ -22,6 +24,10 @@ public class AccountController {
 	
 	@Autowired
 	AccountRepository accountRepository;
+	
+	@Autowired
+	ItemRepository itemRepository;
+
 
 	
 	@RequestMapping("/")
@@ -44,6 +50,8 @@ public class AccountController {
 			List<Account> accountList = accountRepository.findByEmail(email);
 			//ログイン失敗チェック
 			if(accountList.get(0).getEmail().equals(email)&&accountList.get(0).getPassword().equals(password)) {
+				List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
+				mv.addObject("items",itemList);
 				mv.setViewName("item/showItem");
 			}else {
 				mv.addObject("loginmessage","一致するものが見つかりませんでした");
