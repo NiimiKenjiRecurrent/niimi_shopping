@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ショッピングカート</title>
 </head>
 <body>
-
+	<a href="/showItem">戻る</a>
+	<h3>現在入っている商品はこちら</h3>
+    <div th:each="item:${items}">
+    	<table border="1">
+    		<tr>
+    			<td rowspan="2" th:text="${item.value.image}"></td>
+    			<td th:text="${item.value.name}"></td>
+    			<td th:text="${item.value.price}"></td>
+    		</tr>
+    		<tr>
+    			<td>    			
+ 					<a th:href="|/cart/delete/${item.value.id}|">カートから削除</a>
+     			</td>
+    			<td>    			
+ 					<a th:href="|/item/detail/${item.value.id}|">もっと見る</a>
+    			</td>
+    		</tr>
+    	</table>
+    </div>
+    <form action="/order">
+    	<input type="submit" value="購入">
+    </form>
 </body>
 </html>
