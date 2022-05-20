@@ -6,10 +6,12 @@
 </head>
 <body>
 	<h3>購入情報を確認してください</h3>
-	<form action="">
+	<form action="/okok">
 		<p th:text="|名前：${account.name}|"></p>
 		<p th:text="|住所：${account.address}|"></p>
-		<p th:text="|支払方法：${pay.creditNo}|"></p>
+		<div th:each="pay:${pays}">
+			<p th:text="|支払方法：${pay.creditNo}|"></p>
+		</div>
 		<input type="submit" value="確認">
 	</form>
 	

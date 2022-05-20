@@ -47,9 +47,9 @@ public class AccountController {
 			mv.setViewName("account/index");
 		// ok
 		}else {
-			List<Account> accountList = accountRepository.findByEmail(email);
+			Account accountList = accountRepository.findByEmail(email);
 			//ログイン失敗チェック
-			if(accountList.get(0).getEmail().equals(email)&&accountList.get(0).getPassword().equals(password)) {
+			if(accountList.getEmail().equals(email)&&accountList.getPassword().equals(password)) {
 				List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
 				mv.addObject("items",itemList);
 				mv.setViewName("item/showItem");
@@ -58,6 +58,7 @@ public class AccountController {
 				mv.setViewName("account/index");
 			}
 			session.setAttribute("name", email);
+			session.setAttribute("id", accountList.getId());
 		}
 		return mv;
 	}
