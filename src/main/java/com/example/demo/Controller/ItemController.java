@@ -83,6 +83,13 @@ public class ItemController {
 		return mv;
 	}
 	
+	@RequestMapping("/item/detail/{id}")
+	public ModelAndView detail(ModelAndView mv,@PathVariable("id")int id) {
+		Item item = itemRepository.findById(id).get();
+		mv.addObject("items",item);
+		mv.setViewName("/item/itemOnry");
+		return mv;
+	}
 	
 	public Cart getCart() {
 		Cart cart = (Cart) session.getAttribute("cart");

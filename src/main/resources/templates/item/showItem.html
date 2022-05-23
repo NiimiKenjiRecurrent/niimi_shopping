@@ -25,7 +25,9 @@
     <div th:each="item:${items}">
     	<table border="1">
     		<tr>
-    			<td rowspan="2" th:text="${item.image}"></td>
+    			<td rowspan="2">
+    				<img style="width:100px;" th:src="|/${item.image}|" />
+    			</td>
     			<td th:text="${item.name}"></td>
     			<td th:text="${item.price}"></td>
     		</tr>
