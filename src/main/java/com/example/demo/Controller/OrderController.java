@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Entity.Account;
+import com.example.demo.Entity.Cart;
 import com.example.demo.Entity.Pay;
 import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.ItemRepository;
@@ -38,8 +39,19 @@ public class OrderController {
 		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
 		mv.addObject("account",accountInfo);
 		List<Pay> payList = payRepository.findByUserId((int)session.getAttribute("id"));
+		Cart cart = (Cart)session.getAttribute("cart");
+
+		mv.addObject("items", cart.getItems());
+
 		mv.addObject("pays",payList);
 		mv.setViewName("order/orderCheck");
+		return mv;
+	}
+	
+	@RequestMapping("/order/check")
+	public ModelAndView check(ModelAndView mv) {
+		
+		mv.setViewName("order/orderComplete");
 		return mv;
 	}
 }

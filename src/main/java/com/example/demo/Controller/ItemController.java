@@ -33,6 +33,8 @@ public class ItemController {
 	public ModelAndView search(
 			ModelAndView mv,
 			@RequestParam("searchWord") String searchWord) {
+		List<Item> itemList=itemRepository.findAllByNameContaining(searchWord);
+		mv.addObject("items",itemList);
 		mv.setViewName("item/showItem");
 		return mv;
 	}
@@ -80,6 +82,7 @@ public class ItemController {
 		mv.setViewName("item/showItem");
 		return mv;
 	}
+	
 	
 	public Cart getCart() {
 		Cart cart = (Cart) session.getAttribute("cart");

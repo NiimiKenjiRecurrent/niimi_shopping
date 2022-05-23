@@ -6,13 +6,35 @@
 </head>
 <body>
 	<h3>購入情報を確認してください</h3>
-	<form action="/okok">
-		<p th:text="|名前：${account.name}|"></p>
-		<p th:text="|住所：${account.address}|"></p>
-		<div th:each="pay:${pays}">
-			<p th:text="|支払方法：${pay.creditNo}|"></p>
-		</div>
-		<input type="submit" value="確認">
+	<p th:text="|名前：${account.name}|"></p>
+	<hr>
+	<p th:text="|住所：${account.address}|"></p>
+	<form action="/addAddress">
+		<input type="submit" value="住所の追加">
+	</form>
+	<hr>
+	<div th:each="pay:${pays}">
+		<p>支払方法：クレジットカード</p>
+		<p th:text="|クレジット番号:${pay.creditNo}|"></p>
+	</div>
+	<form action="/addPay">
+		<input type="submit" value="支払方法の追加">
+	</form>
+	<hr>
+	<div th:each="item:${items}">
+    	<table border="1">
+    		<tr>
+    			<td rowspan="2" th:text="${item.value.image}"></td>
+    			<td th:text="${item.value.name}"></td>
+    		</tr>
+    		<tr>
+    			<td th:text="${item.value.price}"></td>
+    		</tr>
+    	</table>
+    </div>
+	
+	<form action="/order/check">	
+		<input type="submit" value="完了">
 	</form>
 	
 </body>
