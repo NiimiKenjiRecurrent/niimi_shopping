@@ -40,7 +40,7 @@ public class AccountController {
 			ModelAndView mv,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password) {
-		
+		session.invalidate();
 		//未入力チェック
 		if(email==null||email.length()==0) {
 			mv.addObject("nullmessage","未入力");

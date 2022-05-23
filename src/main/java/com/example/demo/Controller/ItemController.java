@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.Entity.Cart;
 import com.example.demo.Entity.Item;
 import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.ItemRepository;
@@ -39,15 +38,6 @@ public class ItemController {
 		return mv;
 	}
 	
-	@RequestMapping("/cart")
-	public ModelAndView openCart(ModelAndView mv) {
-		
-		Cart cart = getCart();
-		mv.addObject("items", cart.getItems());
-
-		mv.setViewName("cart/cart");
-		return mv;
-	}
 	
 	@RequestMapping("/showItem")
 	public ModelAndView showItem(ModelAndView mv) {
@@ -59,29 +49,7 @@ public class ItemController {
 	}
 	
 	
-	@RequestMapping("/cart/delete/{id}")
-	public ModelAndView delete(
-			ModelAndView mv,
-			@PathVariable("id") int id) {
-		
-		mv.setViewName("cart/cart");
-		return mv;
-	}
 	
-	@RequestMapping("/cart/add/{id}")
-	public ModelAndView addCart(
-			ModelAndView mv,
-			@PathVariable("id")int id) {
-		Item item = itemRepository.findById(id).get();
-		Cart cart=getCart();
-		cart.addCart(item, 1);
-		
-		List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
-		mv.addObject("items",itemList);
-
-		mv.setViewName("item/showItem");
-		return mv;
-	}
 	
 	@RequestMapping("/item/detail/{id}")
 	public ModelAndView detail(ModelAndView mv,@PathVariable("id")int id) {
@@ -91,14 +59,5 @@ public class ItemController {
 		return mv;
 	}
 	
-	public Cart getCart() {
-		Cart cart = (Cart) session.getAttribute("cart");
-
-		if (cart == null) {
-			cart = new Cart();
-			session.setAttribute("cart", cart);
-		}
-		return cart;
-	}
 
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" type="text/css" href="cart.css">
 <meta charset="UTF-8">
 <title>ショッピングカート</title>
 </head>
@@ -8,7 +9,7 @@
 	<a href="/showItem">戻る</a>
 	<h3>現在入っている商品はこちら</h3>
     <div th:each="item:${items}">
-    	<table border="1">
+    	<table border="1" class="flat-table">
     		<tr>
     			<td rowspan="2" th:text="${item.value.image}"></td>
     			<td th:text="${item.value.name}"></td>
