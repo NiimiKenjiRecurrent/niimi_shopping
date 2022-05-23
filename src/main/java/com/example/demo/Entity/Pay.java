@@ -28,6 +28,15 @@ public class Pay {
 		super();
 	}
 	
+	
+	public Pay(Integer userId, String creditNo, Integer creditSecurity) {
+		super();
+		this.userId = userId;
+		this.creditNo = creditNo;
+		this.creditSecurity = creditSecurity;
+	}
+
+
 	public Pay(Integer id, Integer userId, String creditNo, Integer creditSecurity) {
 		super();
 		this.id = id;

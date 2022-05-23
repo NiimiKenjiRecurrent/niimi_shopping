@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 <meta charset="UTF-8">
 <title>購入ページ</title>
 </head>
@@ -10,14 +11,26 @@
 	<hr>
 	<p th:text="|住所：${account.address}|"></p>
 	<form action="/addAddress">
+		<br>
+		<p>別の郵便番号：<input type="text" name="addressNumFront" size="4" maxlength="3" required> － <input type="text" name="addressNumBack" size="5" maxlength="4" onKeyUp="AjaxZip3.zip2addr('addressNumFront','addressNumBack','prefectures','town','addrNum');" required></p>
+		<hr>
+		<p>都道府県：<input type="text" name="prefectures" size="20" required></p>
+		<p>市町村：<input type="text" name="town" size="20" required></p>
+		<p>番地：<input type="text" name="addrNum" size="20" required></p>
+		<p>建物名：<input type="text" name="apart" size="20"></p>
 		<input type="submit" value="住所の追加">
 	</form>
 	<hr>
 	<div th:each="pay:${pays}">
 		<p>支払方法：クレジットカード</p>
 		<p th:text="|クレジット番号:${pay.creditNo}|"></p>
+		<p th:text="|セキュリティコード：${pay.creditSecurity}|"></p>
+		<br>
 	</div>
 	<form action="/addPay">
+		<br>
+		<p>別のクレジット番号：<input type="text" name="creNum"></input></p>
+		<p>セキュリティコード：<input type="password" name="secNum"></input></p>
 		<input type="submit" value="支払方法の追加">
 	</form>
 	<hr>
