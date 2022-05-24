@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>管理者ログイン</title>
 </head>
 <body>
+	<h3>管理者Login</h3>
+	<span th:text="${loginmessage}" style="color:red"></span>
+	<span th:text="${nullmessage}" style="color:red"></span>
+	<form action="/adminlogin" method="post">
+		<p>名前：<input type="text" name="name"></p>
+		<p>PassWord：<input type="password" name="password" placeholder="正規条件表記"></p>
+		<input type="submit" value="ログイン">
+	</form>
+	<hr>
+
 
 </body>
 </html>

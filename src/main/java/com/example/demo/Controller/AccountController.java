@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +16,6 @@ import com.example.demo.Entity.Account;
 import com.example.demo.Entity.Item;
 import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.ItemRepository;
-
 
 @Controller
 public class AccountController {
@@ -49,6 +49,7 @@ public class AccountController {
 		}else {
 			Account accountList = accountRepository.findByEmail(email);
 			//ログイン失敗チェック
+//			BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 			if(accountList.getEmail().equals(email)&&accountList.getPassword().equals(password)) {
 				List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
 				mv.addObject("items",itemList);

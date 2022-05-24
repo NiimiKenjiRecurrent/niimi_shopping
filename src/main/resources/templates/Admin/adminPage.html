@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>管理者ページ</title>
+<script type="text/javascript" src="/js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/common.css">
 </head>
 <body>
+	<nav class="menuWrapper">
+		<div class="hanbergar" onclick="click_hanbergar()"></div>
+		
+        <ul id="menu">
+          <li><a href="/adminItem">商品一覧</a></li>
+          <li><a href="/adminShowUser">ユーザー一覧</a></li>
+          <li><a href="/">ユーザーページ</a></li>
+          <li><a href="/admin">ログアウト</a></li>
+        </ul>
+    </nav>
+
+	<h3>管理者menu</h3>
+	
 
 </body>
 </html>

@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>商品管理ページ</title>
+<script type="text/javascript" src="/js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<link rel="stylesheet" type="text/css" href="/css/itemShow.css">
 </head>
 <body>
+	<nav class="menuWrapper">
+		<div class="hanbergar" onclick="click_hanbergar()"></div>
+		
+        <ul id="menu">
+          <li><a href="/adminItem">商品一覧</a></li>
+          <li><a href="/adminShowUser">ユーザー一覧</a></li>
+          <li><a href="/">ユーザーページ</a></li>
+          <li><a href="/admin">ログアウト</a></li>
+        </ul>
+    </nav>
 
+	<div class="niimi-header">
+		<!-- メニュー -->
+	    
+	    <form action="/search" method="post">
+	    	<p><input type="text" name="searchWord"><input type="submit" value="検索"></p>
+	    </form>
+	</div>
+    
+    <div class="niimi-body" th:each="item:${items}">
+    	<table>
+    		<tr>
+    			<td rowspan="2" style="width: 16%">
+    				<img style="width:100px;" th:src="|/${item.image}|" />
+    			</td>
+    			<td th:text="${item.name}"style="width: 35%" class="priceAndName"></td>
+    			<td th:text="${item.price}" class="priceAndName"></td>
+    		</tr>
+    		<tr>
+    			<td style="width: 40%">    			
+ 					<a th:href="|/admin/delete/${item.id}|">商品削除</a>
+     			</td>
+    			<td style="height: 50px">    			
+ 					<a th:href="|/admin/change/${item.id}|">商品情報変更</a>
+    			</td>
+    		</tr>
+    	</table>
+    </div>
+  	<a href="/admin/add">商品の追加</a>
 </body>
 </html>
