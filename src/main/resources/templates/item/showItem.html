@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css" href="itemShow.css">
 <meta charset="UTF-8">
 <title>Topページ</title>
-<style>
-</style>
+
+<script type="text/javascript" src="/js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<link rel="stylesheet" type="text/css" href="/css/itemShow.css">
 
 </head>
 <body>
+	<nav class="menuWrapper">
+		<div class="hanbergar" onclick="click_hanbergar()"></div>
+		
+        <ul id="menu">
+          <li><a href="/">管理者ページ</a></li>
+          <li><a href="/">マイページ</a></li>
+          <li><a href="/">ログアウト</a></li>
+        </ul>
+    </nav>
+
 	<div class="niimi-header">
 		<a href="/cart">カートへ</a>
 		<!-- メニュー -->
-		<nav class="wrapper">
-	        <ul class="menu">
-	          <li><a href="#">カテゴリ</a></li>
-	          <li><a href="#">作れたら</a></li>
-	          <li><a href="#">ここを</a></li>
-	        </ul>
-	    </nav>
 	    
 	    <form action="/search" method="post">
 	    	<p><input type="text" name="searchWord"><input type="submit" value="検索"></p>
@@ -26,7 +31,7 @@
 	</div>
     
     <div class="niimi-body" th:each="item:${items}">
-    	<table border="1">
+    	<table>
     		<tr>
     			<td rowspan="2" style="width: 16%">
     				<img style="width:100px;" th:src="|/${item.image}|" />
@@ -44,5 +49,7 @@
     		</tr>
     	</table>
     </div>
+    
+    
 </body>
 </html>

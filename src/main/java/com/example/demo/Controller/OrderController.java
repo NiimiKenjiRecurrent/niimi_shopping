@@ -51,7 +51,14 @@ public class OrderController {
 	
 	@RequestMapping("/order/check")
 	public ModelAndView check(ModelAndView mv) {
-		
+//		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
+//		Integer id = accountInfo.getId();
+//		
+//		Account account = new Account(id, addNum,address, email, tell, name, password);
+//		accountRepository.saveAndFlush(account);
+//
+//		session.setAttribute("userInfo", account);
+//		mv.addObject("account", session.getAttribute("account"));
 		mv.setViewName("order/orderComplete");
 		return mv;
 	}
