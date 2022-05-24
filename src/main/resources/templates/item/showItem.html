@@ -16,7 +16,7 @@
 		
         <ul id="menu">
           <li><a href="/">管理者ページ</a></li>
-          <li><a href="/">マイページ</a></li>
+          <li><a href="/userPage">マイページ</a></li>
           <li><a href="/">ログアウト</a></li>
         </ul>
     </nav>
@@ -36,8 +36,8 @@
     			<td rowspan="2" style="width: 16%">
     				<img style="width:100px;" th:src="|/${item.image}|" />
     			</td>
-    			<td th:text="${item.name}"style="width: 35%"></td>
-    			<td th:text="${item.price}"></td>
+    			<td th:text="${item.name}"style="width: 35%" class="priceAndName"></td>
+    			<td th:text="${item.price}" class="priceAndName"></td>
     		</tr>
     		<tr>
     			<td style="width: 40%">    			

@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>my page</title>
 </head>
 <body>
-
+	<h3>ユーザー情報</h3>
+	<hr>
+	
+	<p>氏名：<span th:text="${account.name}"></span></p>
+	<hr>
+	<p>E-mail：<span th:text="${account.email}"></span></p>
+	<hr>
+	<p>電話番号：<span th:text="${account.tell}"></span></p>
+	<hr>
+	<p>郵便番号：<span th:text="${account.addressNum}"></span></p>
+	<hr>
+	<p>住所：<span th:text="${account.address}"></span></p>
+	<hr>
+	<p>UserName：<span th:text="${account.userName}"></span></p>
+	<hr>
+	<p>PassWord：<span th:text="${account.password}"></span></p>
+	<form action="/changeMyPage">	
+		<input type="submit" value="変更">	
+	</form>
+	
 </body>
 </html>

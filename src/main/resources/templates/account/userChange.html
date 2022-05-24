@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ユーザー情報変更ページ</title>
 </head>
 <body>
-
+	<form action="/changeMyPage" method="post">	
+		<h3>変更したい箇所を入力してください</h3>
+		<hr>
+		<p>氏名：<input th:value="${account.name}" name="name"></input></p>
+		<hr>
+		<p>E-mail：<input th:value="${account.email}"name=email></input></p>
+		<hr>
+		<p>電話番号：<input th:value="${account.tell}"name="tell"></input></p>
+		<hr>
+		<p>郵便番号：<input th:value="${account.addressNum}"name="addressNum"></input></p>
+		<hr>
+		<p>住所：<input th:value="${account.address}"name="address"></input></p>
+		<hr>
+		<p>UserName：<input th:value="${account.userName}"name="userName"></input></p>
+		<p>PassWord：<input type="password" th:value="${account.password}"name="passWord"></input></p>
+		<input type="submit" value="確定">	
+	</form>
+	
 </body>
 </html>

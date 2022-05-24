@@ -70,7 +70,7 @@ public class AccountController {
 		return mv;
 	}
 	
-	@RequestMapping(value="signup",method = RequestMethod.POST)
+	@RequestMapping(value="/signup",method = RequestMethod.POST)
 	public ModelAndView signup(ModelAndView mv,
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
@@ -94,4 +94,46 @@ public class AccountController {
 		mv.setViewName("account/index");
 		return mv;
 	}
+	@RequestMapping("/userPage")
+	public ModelAndView openUserPage(ModelAndView mv) {
+		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
+		mv.addObject("account",accountInfo);
+		mv.setViewName("/account/userPage");
+		return mv;
+	}
+	
+	
+	@RequestMapping("/changeMyPage")
+	public ModelAndView changeMyPage(ModelAndView mv) {
+		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
+		mv.addObject("account",accountInfo);
+		mv.setViewName("/account/userChange");
+		return mv;
+	}
+	
+	@RequestMapping(value="/changeMyPage" ,method = RequestMethod.POST)
+	public ModelAndView changeMyPage(ModelAndView mv,
+			@RequestParam("name")String name,
+			@RequestParam("email")String email,
+			@RequestParam("tell")String tell,
+			@RequestParam("addressNum")String addressNum,
+			@RequestParam("address")String address,
+			@RequestParam("userName")String userName,
+			@RequestParam("passWord")String passWord) {
+		
+		// セッションからUseridを取得して、更新
+		
+//		accountRepository.deleteByEmail(email);
+//		accountRepository.flush();
+		
+		Account account=new Account((int)session.getAttribute("id"),userName,address,email,tell,name,passWord,addressNum);
+		accountRepository.saveAndFlush(account);
+		
+		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
+		mv.addObject("account",accountInfo);
+
+		mv.setViewName("account/userPage");
+		return mv;
+	}
+
 }

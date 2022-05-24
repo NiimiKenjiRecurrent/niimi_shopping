@@ -66,6 +66,10 @@ body{
 	display: none;
 }
 
-
+.priceAndName{
+	border-bottom: solid 2px #333333;
+	font-size: 50px;
+	text-align: center;
+}
 
 
