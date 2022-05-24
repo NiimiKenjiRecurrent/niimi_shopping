@@ -53,7 +53,25 @@ public class Item {
 	public Item() {
 		super();
 	}
-	
+	public Item(Integer id,Integer price, Integer stock, String image, String name) {
+		super();
+		this.id=id;
+		this.price = price;
+		this.stock = stock;
+		this.image = image;
+		this.name = name;
+		deliveryDays=3;
+	}
+
+	public Item(Integer price, Integer stock, String image, String name) {
+		super();
+		this.price = price;
+		this.stock = stock;
+		this.image = image;
+		this.name = name;
+		deliveryDays=3;
+	}
+
 	public Item(Integer id, Integer price, Integer stock, String image, String name, Integer deliveryDays) {
 		super();
 		this.id = id;

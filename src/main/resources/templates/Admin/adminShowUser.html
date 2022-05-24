@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ユーザー一覧</title>
+<script type="text/javascript" src="/js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<link rel="stylesheet" type="text/css" href="/css/itemShow.css">
+
 </head>
 <body>
+	<nav class="menuWrapper">
+		<div class="hanbergar" onclick="click_hanbergar()"></div>
+		
+        <ul id="menu">
+          <li><a href="/adminItem">商品一覧</a></li>
+          <li><a href="/adminShowUser">ユーザー一覧</a></li>
+          <li><a href="/">ユーザーページ</a></li>
+          <li><a href="/admin">ログアウト</a></li>
+        </ul>
+    </nav>
 
+	<h3>ユーザー一覧</h3>
+	<div class="niimi-body" th:each="account:${accounts}">
+    	<table>
+    		<tr>
+    			<td th:text="${account.name}"style="width: 35%" class="priceAndName"></td>
+    			<td th:text="${account.userName}" class="priceAndName"></td>
+    		</tr>
+    		<tr>
+    			<td style="width: 40%">    			
+ 					<a th:href="|/user/delete/${account.id}|">ユーザー削除</a>
+     			</td>
+    		</tr>
+    	</table>
+    </div>
+	
 </body>
 </html>

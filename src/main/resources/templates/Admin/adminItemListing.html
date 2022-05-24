@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>アイテム情報変更ページ</title>
 </head>
 <body>
-
+	<form th:action="|/changeItemInfo/${itemId}|" method="post">	
+		<h3>変更したい箇所を入力してください</h3>
+		<hr>
+		<p>商品名：<input th:value="${item.name}" name="name"></input></p>
+		<hr>
+		<p>価格：<input th:value="${item.price}"name="price"></input></p>
+		<hr>
+		<input type="submit" value="確定">	
+	</form>
 </body>
 </html>

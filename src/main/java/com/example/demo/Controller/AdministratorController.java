@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.Entity.Account;
 import com.example.demo.Entity.Administrator;
 import com.example.demo.Entity.Item;
+import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.AdministratorRepository;
 import com.example.demo.Repository.ItemRepository;
 
@@ -27,6 +29,10 @@ public class AdministratorController {
 	
 	@Autowired
 	ItemRepository itemRepository;
+	
+	@Autowired
+	AccountRepository accountRepository;
+
 
 
 	@RequestMapping("/admin")
@@ -88,12 +94,65 @@ public class AdministratorController {
 		return mv;
 	}
 	
-	@RequestMapping("/Admin/change/{id}")
+	@RequestMapping("/admin/change/{id}")
 	public ModelAndView changeItem(ModelAndView mv,
 			@PathVariable("id")int id) {
+		mv.addObject("itemId", id);
 		Item itemInfo = itemRepository.findById(id).get();
 		mv.addObject("item",itemInfo);
 		mv.setViewName("/Admin/adminItemListing");
+		return mv;
+	}
+	@RequestMapping(value="/changeItemInfo/{id}",method = RequestMethod.POST)
+	public ModelAndView changeItemInfo(ModelAndView mv,
+			@RequestParam("name")String name,
+			@RequestParam("price")int price,
+			@PathVariable("id")int id) {
+		Item itemInfo = itemRepository.findById(id).get();
+		Item updateItem = new Item(itemInfo.getId(),price,itemInfo.getStock(),itemInfo.getImage(),name);
+		itemRepository.saveAndFlush(updateItem);
+		List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
+		mv.addObject("items",itemList);
+
+		mv.setViewName("Admin/adminItem");
+		return mv;
+	}
+	@RequestMapping("/admin/add")
+	public ModelAndView addItem(ModelAndView mv) {
+		
+		mv.setViewName("/Admin/addItem");
+		return mv;
+	}
+	@RequestMapping(value="/admin/add",method = RequestMethod.POST)
+	public ModelAndView addItem(ModelAndView mv,
+			@RequestParam("name")String name,
+			@RequestParam("price")int price,
+			@RequestParam("img")String img) {
+		Item updateItem = new Item(price,10,img,name);
+		itemRepository.saveAndFlush(updateItem);
+		List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
+		mv.addObject("items",itemList);
+
+		mv.setViewName("Admin/adminItem");
+		return mv;
+	}
+	
+	@RequestMapping("adminShowUser")
+	public ModelAndView showUser(ModelAndView mv) {
+		List<Account> accountList = accountRepository.findALLByOrderByIdAsc();
+		mv.addObject("accounts", accountList);
+		mv.setViewName("/Admin/adminShowUser");
+		return mv;
+	}
+	@RequestMapping("/user/delete/{id}")
+	public ModelAndView deleteUser(ModelAndView mv,
+			@PathVariable("id")int id) {
+		accountRepository.deleteById(id);
+		
+		List<Account> accountList = accountRepository.findALLByOrderByIdAsc();
+		mv.addObject("accounts", accountList);
+
+		mv.setViewName("Admin/adminShowUser");
 		return mv;
 	}
 }

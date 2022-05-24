@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品追加</title>
+</head>
+<body>
+	<form action="/admin/add" method="post">	
+		<h3>追加したい商品情報を入力してください</h3>
+		<hr>
+		<p>商品名：<input type="text"name="name" /></p>
+		<hr>
+		<p>価格：<input type="text" name="price" /></p>
+		<hr>
+		<p>画像：<input type="text" name="img"/></p>
+		<hr>		
+		<input type="submit" value="確定">	
+	</form>
+
+
+</body>
+</html>
