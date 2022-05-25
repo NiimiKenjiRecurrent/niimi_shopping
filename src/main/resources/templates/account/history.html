@@ -5,18 +5,19 @@
 <title>注文履歴</title>
 </head>
 <body>
-	<h3>注文履歴</h3>
+	<h3>--------------注文履歴----------------------------------------------------</h3>
 	<div class="niimi-body">
     	<table th:each="item:${items}">
     		<tr>
     			<td rowspan="2" style="width: 16%">
-    				<img style="width:100px;" th:src="|/${item.itemId}|" />
+    				<img style="width:100px;" th:src="|/${item.img}|" />
     			</td>
-    			<td th:text="${item.quantity}"style="width: 35%" class="priceAndName"></td>
+    			<td th:text="|商品名：${item.itemname}|"style="width: 35%" class="priceAndName"></td>
+    			<td th:text="|価格：${item.price} 円|"style="width: 35%" class="priceAndName"></td>
     		</tr>
-    		    <td th:text="${item.orderedDate}" class="priceAndName"></td>
     		<tr>
-
+    		    <td th:text="|購入日時：${item.orderedDate}|" class="priceAndName"></td>
+    		    <td th:text="|個数：${item.quantity} 個|"></td>
     		</tr>
     	</table>
     </div>

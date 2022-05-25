@@ -142,9 +142,8 @@ public class AccountController {
 	@RequestMapping("/history")
 	public ModelAndView history(ModelAndView mv) {
 		
-		
 		List<OrderHis> his = orderDetailRepository.niimi((int)session.getAttribute("id"));
-		
+
 		mv.addObject("items", his);
 		mv.setViewName("/account/history");
 		return mv;

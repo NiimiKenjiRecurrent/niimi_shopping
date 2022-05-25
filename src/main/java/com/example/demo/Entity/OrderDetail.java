@@ -13,9 +13,9 @@ import com.example.demo.OrderHis;
 @Entity
 @Table(name="order_detail")
 @NamedNativeQuery(name = "OrderDetail.niimi", 
-query = "select d.item_id, d.quantity, o.ordered_date "
+query = "select d.item_id, d.quantity, o.ordered_date, i.name as itemname, i.price, i.image "
 		+ "from ordered o inner join order_detail d "
-		+ "on o.id = d.ordered_id "
+		+ "on o.id = d.ordered_id left join items i on d.item_id = i.id "
 		+ "where o.user_id = ?1", resultClass = OrderHis.class)
 public class OrderDetail {
 
