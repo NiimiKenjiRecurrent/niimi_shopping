@@ -9,11 +9,11 @@
 	<h3>ユーザー情報を入力してください</h3>
 	<hr>
 	<form action="/signup" method="post">
-		<p>氏名：<input type="text" name="name" placeholder="田中太郎" required></p>
+		<p>氏名：<input th:value="${accountInfo.name}" type="text" name="name" placeholder="田中太郎" required></p>
 		<hr>
-		<p>E-mail：<input type="email" name="email" placeholder="～～～@～.～.～" required></p>
+		<p>E-mail：<input th:value="${accountInfo.email}" type="email" name="email" placeholder="～～～@～.～.～" required></p>
 		<hr>
-		<p>電話番号：<input type="text" name="tell" placeholder="ハイフンなしで入力" required></p>
+		<p>電話番号：<input th:value="${accountInfo.tell}" type="text" name="tell" placeholder="ハイフンなしで入力" required></p>
 		<hr>
 		<p>郵便番号：<input type="text" name="addressNumFront" size="4" maxlength="3" required> － <input type="text" name="addressNumBack" size="5" maxlength="4" onKeyUp="AjaxZip3.zip2addr('addressNumFront','addressNumBack','prefectures','town','addrNum');" required></p>
 		<hr>
@@ -22,10 +22,10 @@
 		<p>番地：<input type="text" name="addrNum" size="20" required></p>
 		<p>建物名：<input type="text" name="apart" size="20"></p>
 		<hr>
-		<p>UserName：<input type="password" name="userName" placeholder="abcd" required>
-		<p>PassWord：<input type="password" name="password" required></p>
+		<p>UserName：<input type="text" name="userName" placeholder="abcd" required>
+		<p>PassWord：<input type="password" name="password" placeholder="大小英字数字記号含む8文字以上" required></p>
 		もう一度入力してください
-		<p>PassWord：<input type="text" name="passwordCon" required></p>
+		<p>PassWord：<input type="password" name="passwordCon" placeholder="大小英字数字記号含む8文字以上" required></p>
 		
 		<input type="submit" value="登録">	
 	</form>

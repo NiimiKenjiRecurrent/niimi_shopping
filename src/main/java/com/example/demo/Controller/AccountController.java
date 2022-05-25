@@ -1,6 +1,13 @@
 package com.example.demo.Controller;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.OrderHis;
+import com.example.demo.OrderHisDisp;
 import com.example.demo.Entity.Account;
 import com.example.demo.Entity.Item;
 import com.example.demo.Repository.AccountRepository;
@@ -53,7 +61,16 @@ public class AccountController {
 			Account accountList = accountRepository.findByEmail(email);
 			//ログイン失敗チェック
 //			BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-			if(accountList.getEmail().equals(email)&&accountList.getPassword().equals(password)) {
+			MessageDigest sha512 = null;
+			try {
+				sha512 = MessageDigest.getInstance("SHA-512");
+			} catch (NoSuchAlgorithmException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			byte[] sha512_result = sha512.digest(password.getBytes());
+
+			if(accountList.getEmail().equals(email)&&accountList.getPassword().equals(String.format("%040x", new BigInteger(1, sha512_result)))) {
 				List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
 				mv.addObject("items",itemList);
 				mv.setViewName("item/showItem");
@@ -69,7 +86,11 @@ public class AccountController {
 	
 	@RequestMapping("signup")
 	public ModelAndView signup(ModelAndView mv) {
-		
+		String email="";
+		String tell="";
+		String name="";
+		Account account =new Account("","",email, tell, name,"","");
+		mv.addObject("accountInfo", account);
 		mv.setViewName("account/signUp");
 		return mv;
 	}
@@ -90,9 +111,32 @@ public class AccountController {
 			@RequestParam("passwordCon") String passwordCon) {
 		String addressNum = addressNumFront + addressNumBack;
 		String address = prefectures + town + addrNum + apart;
-		
 		// データベースに登録
-		Account account =new Account(userName, address, email, tell, name, password,addressNum);
+		
+		
+		MessageDigest sha512 = null;
+		try {
+			sha512 = MessageDigest.getInstance("SHA-512");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		byte[] sha512_result = sha512.digest(password.getBytes());
+		
+		
+		
+		
+		Account account =new Account(userName, address, email, tell, name, String.format("%040x", new BigInteger(1, sha512_result)),addressNum);
+		if(!checkPassword(password)) {
+			mv.addObject("accountInfo", account);
+			mv.setViewName("account/signUp");
+			return mv;
+		}else if(!password.equals(passwordCon)) {
+			mv.addObject("accountInfo", account);
+			mv.setViewName("account/signUp");
+			return mv;
+		}
+
 		accountRepository.saveAndFlush(account);
 
 		mv.setViewName("account/index");
@@ -139,14 +183,42 @@ public class AccountController {
 		mv.setViewName("account/userPage");
 		return mv;
 	}
+	
+	
 	@RequestMapping("/history")
 	public ModelAndView history(ModelAndView mv) {
+		Map<Integer, OrderHisDisp> displist = new HashMap<>();
 		
-		List<OrderHis> his = orderDetailRepository.niimi((int)session.getAttribute("id"));
+		List<OrderHis> datas = orderDetailRepository.niimi((int)session.getAttribute("id"));
 
-		mv.addObject("items", his);
+		for(OrderHis his: datas) {
+			OrderHisDisp existed = displist.get(his.getOrderId());
+			
+			if(existed != null) {
+				existed.getOrderhiss().add(his);
+			}
+			else {
+				OrderHisDisp disp = new OrderHisDisp();
+				disp.setOrderId(his.getOrderId());
+				disp.setOrderedDate(his.getOrderedDate());
+				disp.setTotalPrice(his.getTotalPrice());
+				disp.getOrderhiss().add(his);
+				
+				displist.put(his.getOrderId(), disp);
+			}
+			
+		}
+
+		mv.addObject("items", displist);
 		mv.setViewName("/account/history");
 		return mv;
 	}
+	
+	public boolean checkPassword(String pass) {
+		Pattern p = Pattern.compile("^$|^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!-/:-@\\[-`{-~])[!-~]*");
+		Matcher m = p.matcher(pass);
+		return m.matches();
+	}
+	
 
 }

@@ -135,5 +135,15 @@ public class OrderController {
 		return mv;
 	}
 	
+	public void test() {
+		
+		// ①select文にorderIDとtotalPriceの取得を追加
+		// ②OrderHisに↑の変数、ゲッターセッターを追加
+		// ③この処理を、historyの中に記述
+		// ④displistをaddObject
+		// ⑤HTMLを変更(.value.orderId / .value.orderhissをさらにeachにかけて処理)
+		
+	}
+
 	
 }
