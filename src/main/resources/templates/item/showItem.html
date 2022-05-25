@@ -36,8 +36,8 @@
     			<td rowspan="2" style="width: 16%">
     				<img style="width:100px;" th:src="|/${item.image}|" />
     			</td>
-    			<td th:text="${item.name}"style="width: 35%" class="priceAndName"></td>
-    			<td th:text="${item.price}" class="priceAndName"></td>
+    			<td th:text="|商品名：${item.name}|"style="width: 35%" class="priceAndName"></td>
+    			<td th:text="|価格：${item.price} 円|" class="priceAndName"></td>
     		</tr>
     		<tr>
     			<td style="width: 40%">    			
