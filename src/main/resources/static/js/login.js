@@ -1,5 +1,5 @@
  $(document).ready(function(){
-  var formInputs = $('input[type="email"],input[type="password"]');
+  var formInputs = $('input[type="email"],input[type="password"],input[type="text"]');
   formInputs.focus(function() {
        $(this).parent().children('p.formLabel').addClass('formTop');
        $('div#formWrapper').addClass('darken-bg');

@@ -4,30 +4,78 @@
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 <meta charset="UTF-8">
 <title>SignUp</title>
+<script src="https://code.jquery.com/jquery-2.1.0.min.js" ></script>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<script type="text/javascript" src="/js/login.js"></script>
 </head>
 <body>
-	<h3>ユーザー情報を入力してください</h3>
-	<hr>
-	<form action="/signup" method="post">
-		<p>氏名：<input th:value="${accountInfo.name}" type="text" name="name" placeholder="田中太郎" required></p>
-		<hr>
-		<p>E-mail：<input th:value="${accountInfo.email}" type="email" name="email" placeholder="～～～@～.～.～" required></p>
-		<hr>
-		<p>電話番号：<input th:value="${accountInfo.tell}" type="text" name="tell" placeholder="ハイフンなしで入力" required></p>
-		<hr>
-		<p>郵便番号：<input type="text" name="addressNumFront" size="4" maxlength="3" required> － <input type="text" name="addressNumBack" size="5" maxlength="4" onKeyUp="AjaxZip3.zip2addr('addressNumFront','addressNumBack','prefectures','town','addrNum');" required></p>
-		<hr>
-		<p>都道府県：<input type="text" name="prefectures" size="20" required></p>
-		<p>市町村：<input type="text" name="town" size="20" required></p>
-		<p>番地：<input type="text" name="addrNum" size="20" required></p>
-		<p>建物名：<input type="text" name="apart" size="20"></p>
-		<hr>
-		<p>UserName：<input type="text" name="userName" placeholder="abcd" required>
-		<p>PassWord：<input type="password" name="password" placeholder="大小英字数字記号含む8文字以上" required></p>
-		もう一度入力してください
-		<p>PassWord：<input type="password" name="passwordCon" placeholder="大小英字数字記号含む8文字以上" required></p>
-		
-		<input type="submit" value="登録">	
-	</form>
+	<div id="formWrapper">
+	
+		<div id="form">
+			<div class="logo">
+				<h1>SignUP</h1>
+			</div>
+			<hr>
+			<form action="/signup" method="post">
+				<div class="form-item">
+			    	<p class="formLabel">氏名</p>
+			    	<input th:value="${accountInfo.name}" type="text" name="name" id="name" class="form-style" autocomplete="off"/>
+			    </div>
+			    <div class="form-item">
+			    	<p class="formLabel">Email</p>
+			    	<input th:value="${accountInfo.email}" type="email" name="email" id="email" class="form-style" autocomplete="off"/>
+			    </div>
+			    <div class="form-item">
+			    	<p class="formLabel">Tel</p>
+			    	<input th:value="${accountInfo.tell}" type="text" name="tell" id="tell" class="form-style" autocomplete="off"/>
+			    </div>
+			    <hr>
+			    <div class="form-item">
+			    	<p class="formLabel">郵便番号上3桁</p>
+			    	<input type="text" name="addressNumFront" id="addressNumFront" class="form-style" size="4" maxlength="3" required autocomplete="off"/>
+			    </div>
+			    <div class="form-item">
+			    	<p class="formLabel">郵便番号下4桁</p>
+			    	<input type="text" name="addressNumBack" id="addressNumBack" size="5" maxlength="4" onKeyUp="AjaxZip3.zip2addr('addressNumFront','addressNumBack','prefectures','town','addrNum');" required autocomplete="off"/>
+				</div>
+				<hr>
+			    <div class="form-item">
+			    	<p class="formLabel">都道府県</p>
+			    	<input type="text" name="prefectures" size="20" id="prefectures" class="form-style" autocomplete="off" required>
+			    </div>
+			    <div class="form-item">
+			    	<p class="formLabel">市町村</p>
+			    	<input type="text" name="town" size="20" id="town" class="form-style" autocomplete="off" required>
+			    </div>
+			    <div class="form-item">
+			    	<p class="formLabel">番地</p>
+			    	<input type="text" name="addrNum" size="20" id="addrNum" class="form-style" autocomplete="off" required>
+			    </div>
+			    <div class="form-item">
+			    	<p class="formLabel">建物名</p>
+			    	<input type="text" name="apart" size="20" id="apart" class="form-style" autocomplete="off" required>
+			    </div>
+			    <hr>
+			    <div class="form-item">
+			    	<p class="formLabel">UserName</p>
+			    	<input type="text" name="userName" id="userName" class="form-style" autocomplete="off" required>
+			    </div>
+			    <p class="form-style">大小英字数字記号含む8文字以上</p>
+			    <div class="form-item">
+			    	<p class="formLabel">PassWord</p>
+			    	<input type="password" name="password" id="password" class="form-style" autocomplete="off" required>
+			    </div>
+			    <p class="form-style">もう一度入力してください</p>
+			    <div class="form-item">
+			    	<p class="formLabel">PassWord</p>
+			    	<input type="password" name="passwordCon" id="password" class="form-style" autocomplete="off" required>
+			    </div>
+			    <div class="form-item">
+				    <input type="submit" class="login pull-right" value="SignUP">	    
+			    	<div class="clear-fix"></div>
+		    	</div>
+		    </form>
+		</div>
+	</div>
 </body>
 </html>

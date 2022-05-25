@@ -31,7 +31,7 @@ div.logo svg{
 
 div#form{
   position: absolute;
-  width:360px;
+  width:600px;
   height:320px;
   height:auto;
   background-color: #f5f5f5;
@@ -40,13 +40,13 @@ div#form{
   padding:20px;
   left:50%;
   top:50%;
-  margin-left:-180px;
-  margin-top:-200px;
+  margin-left:-350px;
+  margin-top:-250px;
 }
 div.form-item{position: relative; display: block; margin-bottom: 20px;}
  input{transition: all .2s ease;}
  input.form-style{
-  color:#f5f5f5;
+  color:#696969;
   display: block;
   width: 90%;
   height: 44px;
@@ -62,6 +62,11 @@ div.form-item{position: relative; display: block; margin-bottom: 20px;}
   font-family:'HelveticaNeue','Arial', sans-serif;
   font-size: 105%;
   letter-spacing: .8px;
+}
+p.form-style{
+	color:#696969;
+	font-family:'HelveticaNeue','Arial', sans-serif;
+	font-size: 105%;
 }
 div.form-item .form-style:focus{
 	outline: none; 
