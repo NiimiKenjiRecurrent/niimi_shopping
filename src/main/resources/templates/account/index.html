@@ -3,17 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<script src="https://code.jquery.com/jquery-2.1.0.min.js" ></script>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<script type="text/javascript" src="/js/login.js"></script>
 </head>
 <body>
-	<h3>Login</h3>
-	<span th:text="${loginmessage}" style="color:red"></span>
-	<span th:text="${nullmessage}" style="color:red"></span>
+<div id="formWrapper">
+
+<div id="form">
+<div class="logo">
+<h1>Login</h1>
+</svg>
+</div>
 	<form action="/login" method="post">
-		<p>E-mail<input type="text" name="email" placeholder="～～～@～.～.～"></p>
-		<p>PassWord<input type="password" name="password" placeholder="正規条件表記"></p>
-		<input type="submit" value="ログイン">
-	</form>
-	<hr>
-	<a href="signup">アカウント新規登録</a>
+
+	    <div class="form-item">
+	    
+	    	<p class="formLabel">Email</p>
+	    	<input type="email" name="email" id="email" class="form-style" autocomplete="off"/>
+	    </div>
+	    <div class="form-item">
+	    	<p class="formLabel">Password</p>
+	    	<input type="password" name="password" id="password" class="form-style" />
+	    	<!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
+	    </div>
+	    <div class="form-item">
+		    <p class="pull-left"><a href="signup"><small>SignUP</small></a></p>
+		    <input type="submit" class="login pull-right" value="Log In">
+	    
+	    	<div class="clear-fix"></div>
+    	</div>
+    </form>
+</div>
+</div>
 </body>
 </html>
