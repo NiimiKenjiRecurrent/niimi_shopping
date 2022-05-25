@@ -60,7 +60,7 @@ public class OrderController {
 	
 	@RequestMapping("/order/check")
 	public ModelAndView check(ModelAndView mv) {
-			
+		
 		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
 		Integer userId = accountInfo.getId();
 		Cart cart = (Cart)session.getAttribute("cart");
@@ -69,11 +69,10 @@ public class OrderController {
 		Order orderInfo = new Order(userId, cart.getTotal());
 		orderRepository.saveAndFlush(orderInfo);
 		// オーダー詳細登録
-		int[] idWork=new int[100];
-		int i=0;
+		List<Integer> idWork = new ArrayList<>();
+		
 		for(Item item :cart.getItems().values()) {
-			idWork[i]=item.getId();
-			i++;
+			idWork.add(item.getId());
 		}
 		// ・オーダーのIDを取得
 		List<OrderDetail> detailInfos=new ArrayList<OrderDetail>();
@@ -124,9 +123,10 @@ public class OrderController {
 		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
 		mv.addObject("account",accountInfo);
 		List<Pay> payList = payRepository.findByUserId((int)session.getAttribute("id"));
-		payList.add(new Pay((int)session.getAttribute("id"),creNum,secNum));
+		Pay newPay=new Pay((int)session.getAttribute("id"),creNum,secNum);
+		payList.add(newPay);
 		Cart cart = (Cart)session.getAttribute("cart");
-
+		payRepository.saveAndFlush(newPay);
 		mv.addObject("items", cart.getItems());
 		mv.addObject("flg","true");
 		mv.addObject("pays",payList);
