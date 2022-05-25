@@ -22,8 +22,9 @@
 		<input type="submit" value="住所の変更">
 	</form>
 	<hr>
+	<p>支払方法：クレジットカード</p>
 	<div th:each="pay:${pays}">
-		<p>支払方法：クレジットカード</p>
+		<input type="radio" name="payButton" value="pay.index">
 		<p th:text="|クレジット番号:${pay.creditNo}|"></p>
 		<p th:text="|セキュリティコード：${pay.creditSecurity}|"></p>
 		<br>

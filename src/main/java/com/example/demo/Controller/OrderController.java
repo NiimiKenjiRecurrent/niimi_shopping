@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,9 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Entity.Account;
 import com.example.demo.Entity.Cart;
+import com.example.demo.Entity.Item;
+import com.example.demo.Entity.Order;
+import com.example.demo.Entity.OrderDetail;
 import com.example.demo.Entity.Pay;
 import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.ItemRepository;
+import com.example.demo.Repository.OrderDetailRepository;
 import com.example.demo.Repository.OrderRepository;
 import com.example.demo.Repository.PayRepository;
 
@@ -31,6 +36,10 @@ public class OrderController {
 	
 	@Autowired
 	OrderRepository orderRepository;
+	
+	@Autowired
+	OrderDetailRepository orderDetailRepository;
+
 	
 	@Autowired
 	PayRepository payRepository;
@@ -51,9 +60,31 @@ public class OrderController {
 	
 	@RequestMapping("/order/check")
 	public ModelAndView check(ModelAndView mv) {
-//		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
-//		Integer id = accountInfo.getId();
-//		
+			
+		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
+		Integer userId = accountInfo.getId();
+		Cart cart = (Cart)session.getAttribute("cart");
+		
+		// オーダー登録
+		Order orderInfo = new Order(userId, cart.getTotal());
+		orderRepository.saveAndFlush(orderInfo);
+		// オーダー詳細登録
+		int[] idWork=new int[100];
+		int i=0;
+		for(Item item :cart.getItems().values()) {
+			idWork[i]=item.getId();
+			i++;
+		}
+		// ・オーダーのIDを取得
+		List<OrderDetail> detailInfos=new ArrayList<OrderDetail>();
+		for(int itemId:idWork) {
+			detailInfos.add(new OrderDetail(orderInfo.getCode(),itemId,1));
+		}
+		for(OrderDetail detail:detailInfos) {
+			orderDetailRepository.saveAndFlush(detail);
+		}
+				
+		
 //		Account account = new Account(id, addNum,address, email, tell, name, password);
 //		accountRepository.saveAndFlush(account);
 //
@@ -103,4 +134,6 @@ public class OrderController {
 		mv.setViewName("order/orderCheck");
 		return mv;
 	}
+	
+	
 }

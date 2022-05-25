@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>注文履歴</title>
+</head>
+<body>
+	<h3>注文履歴</h3>
+	<div class="niimi-body">
+    	<table th:each="item:${items}">
+    		<tr>
+    			<td rowspan="2" style="width: 16%">
+    				<img style="width:100px;" th:src="|/${item.itemId}|" />
+    			</td>
+    			<td th:text="${item.quantity}"style="width: 35%" class="priceAndName"></td>
+    		</tr>
+    		    <td th:text="${item.orderedDate}" class="priceAndName"></td>
+    		<tr>
+
+    		</tr>
+    	</table>
+    </div>
+	
+</body>
+</html>

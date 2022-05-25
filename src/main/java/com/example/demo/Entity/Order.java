@@ -39,6 +39,14 @@ public class Order {
 		this.orderedDate = LocalDateTime.now();
 		this.totalPrice = totalPrice;
 	}
+	
+
+	public Order(Integer userId, Integer totalPrice) {
+		super();
+		this.userId = userId;
+		this.orderedDate = LocalDateTime.now();
+		this.totalPrice = totalPrice;
+	}
 
 	public Integer getCode() {
 		return code;

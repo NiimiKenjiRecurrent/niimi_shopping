@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.OrderHis;
 import com.example.demo.Entity.Account;
 import com.example.demo.Entity.Item;
 import com.example.demo.Repository.AccountRepository;
 import com.example.demo.Repository.ItemRepository;
+import com.example.demo.Repository.OrderDetailRepository;
 
 @Controller
 public class AccountController {
@@ -28,7 +30,8 @@ public class AccountController {
 	@Autowired
 	ItemRepository itemRepository;
 
-
+	@Autowired
+	OrderDetailRepository orderDetailRepository;
 	
 	@RequestMapping("/")
 	public String login() {
@@ -134,6 +137,16 @@ public class AccountController {
 		mv.addObject("account",accountInfo);
 
 		mv.setViewName("account/userPage");
+		return mv;
+	}
+	@RequestMapping("/history")
+	public ModelAndView history(ModelAndView mv) {
+		
+		
+		List<OrderHis> his = orderDetailRepository.niimi((int)session.getAttribute("id"));
+		
+		mv.addObject("items", his);
+		mv.setViewName("/account/history");
 		return mv;
 	}
 

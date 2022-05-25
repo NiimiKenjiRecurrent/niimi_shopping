@@ -2,7 +2,7 @@
  * 
  */
  
- let dispmenu = false;
+ let dispmenu = true;
  
  function click_hanbergar(){
 	let menu = document.getElementById("menu");
