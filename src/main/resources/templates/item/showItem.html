@@ -5,7 +5,6 @@
 <title>Topページ</title>
 
 <script type="text/javascript" src="/js/common.js"></script>
-
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 <link rel="stylesheet" type="text/css" href="/css/itemShow.css">
 
@@ -25,31 +24,34 @@
 		<a href="/cart">カートへ</a>
 		<!-- メニュー -->
 	    
-	    <form action="/search" method="post">
-	    	<p style="text-align: center;"><input type="text" name="searchWord"><input type="submit" value="検索"></p>
+	    <form action="/search" method="post" class="center">
+	    	<p>
+		    	<input type="text" name="searchWord" class="form-style">
+		    	<input type="submit" class="login pull-right" value="検索">
+	    	</p>
 	    </form>
 	</div>
-    
-    <div class="niimi-body" th:each="item:${items}">
-    	<table>
-    		<tr>
-    			<td rowspan="2" style="width: 16%">
-    				<img style="width:100px;" th:src="|/${item.image}|" />
-    			</td>
-    			<td th:text="|商品名：${item.name}|"style="width: 35%" class="priceAndName"></td>
-    			<td th:text="|価格：${item.price} 円|" class="priceAndName"></td>
-    		</tr>
-    		<tr>
-    			<td style="width: 40%">    			
- 					<a th:href="|/cart/add/${item.id}|">カートに追加</a>
-     			</td>
-    			<td style="height: 50px">    			
- 					<a th:href="|/item/detail/${item.id}|">もっと見る</a>
-    			</td>
-    		</tr>
-    	</table>
+    <div class="item-form">
+	    <div class="niimi-body" th:each="item:${items}">
+	    	<table>
+	    		<tr>
+	    			<td rowspan="2" style="width: 16%">
+	    				<img style="width:100px;" th:src="|/${item.image}|" />
+	    			</td>
+	    			<td th:text="|${item.name}|"style="width: 35%" class="priceAndName"></td>
+	    			<td th:text="|価格：${item.price} 円|" class="priceAndName"></td>
+	    		</tr>
+	    		<tr>
+	    			<td style="width: 40%">    			
+	 					<a th:href="|/cart/add/${item.id}|">カートに追加</a>
+	     			</td>
+	    			<td style="height: 50px">    			
+	 					<a th:href="|/item/detail/${item.id}|">もっと見る</a>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    </div>
     </div>
-    
     
 </body>
 </html>
