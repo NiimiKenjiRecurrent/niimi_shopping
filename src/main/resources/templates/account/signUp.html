@@ -19,15 +19,15 @@
 			<form action="/signup" method="post">
 				<div class="form-item">
 			    	<p class="formLabel">氏名</p>
-			    	<input th:value="${accountInfo.name}" type="text" name="name" id="name" class="form-style" autocomplete="off"/>
+			    	<input th:value="${accountInfo.name}" type="text" name="name" id="name" class="form-style" required autocomplete="off"/>
 			    </div>
 			    <div class="form-item">
 			    	<p class="formLabel">Email</p>
-			    	<input th:value="${accountInfo.email}" type="email" name="email" id="email" class="form-style" autocomplete="off"/>
+			    	<input th:value="${accountInfo.email}" type="email" name="email" id="email" class="form-style" required autocomplete="off"/>
 			    </div>
 			    <div class="form-item">
 			    	<p class="formLabel">Tel</p>
-			    	<input th:value="${accountInfo.tell}" type="text" name="tell" id="tell" class="form-style" autocomplete="off"/>
+			    	<input th:value="${accountInfo.tell}" type="text" name="tell" id="tell" class="form-style" required autocomplete="off"/>
 			    </div>
 			    <hr>
 			    <div class="form-item">
@@ -36,7 +36,7 @@
 			    </div>
 			    <div class="form-item">
 			    	<p class="formLabel">郵便番号下4桁</p>
-			    	<input type="text" name="addressNumBack" id="addressNumBack" size="5" maxlength="4" onKeyUp="AjaxZip3.zip2addr('addressNumFront','addressNumBack','prefectures','town','addrNum');" required autocomplete="off"/>
+			    	<input type="text" name="addressNumBack" id="addressNumBack" class="form-style" size="5" maxlength="4" onKeyUp="AjaxZip3.zip2addr('addressNumFront','addressNumBack','prefectures','town','addrNum');" required autocomplete="off"/>
 				</div>
 				<hr>
 			    <div class="form-item">
@@ -53,7 +53,7 @@
 			    </div>
 			    <div class="form-item">
 			    	<p class="formLabel">建物名</p>
-			    	<input type="text" name="apart" size="20" id="apart" class="form-style" autocomplete="off" required>
+			    	<input type="text" name="apart" size="20" id="apart" class="form-style" autocomplete="off">
 			    </div>
 			    <hr>
 			    <div class="form-item">

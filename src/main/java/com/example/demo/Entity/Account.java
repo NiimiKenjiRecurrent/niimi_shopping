@@ -52,7 +52,7 @@ public class Account {
 		this.addressNum = addressNum;
 	}
 
-	public Account(Integer id, String userName, String address, String email, String tell, String name, String password,
+	public Account(Integer id, String userName, String address, String email, String tell, String name,
 			String addressNum) {
 		super();
 		this.id = id;
@@ -61,9 +61,22 @@ public class Account {
 		this.email = email;
 		this.tell = tell;
 		this.name = name;
-		this.password = password;
 		this.addressNum = addressNum;
 	}
+
+	public Account(Integer id, String userName, String address, String email, String tell, String name,String password,
+			String addressNum) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.address = address;
+		this.email = email;
+		this.tell = tell;
+		this.name = name;
+		this.addressNum = addressNum;
+		this.password=password;
+	}
+
 
 	public Integer getId() {
 		return id;

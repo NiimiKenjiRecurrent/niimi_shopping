@@ -11,4 +11,5 @@ public interface AccountRepository extends JpaRepository<Account, Integer>{
 	Account findById(int id);
 	void deleteByEmail(String email);
 	List<Account> findALLByOrderByIdAsc();
+	List<Account> findAllByEmail(String email);
 }

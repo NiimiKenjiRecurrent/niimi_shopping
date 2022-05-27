@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>my page</title>
+<link rel="stylesheet" type="text/css" href="/css/user.css">
+
 </head>
 <body>
 	<h3>ユーザー情報</h3>
@@ -20,7 +22,6 @@
 	<hr>
 	<p>UserName：<span th:text="${account.userName}"></span></p>
 	<hr>
-	<p>PassWord：<span th:text="${account.password}"></span></p>
 	<form action="/changeMyPage">	
 		<input type="submit" value="変更">	
 	</form>

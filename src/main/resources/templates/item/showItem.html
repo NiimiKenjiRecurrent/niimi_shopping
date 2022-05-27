@@ -7,6 +7,7 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 <link rel="stylesheet" type="text/css" href="/css/itemShow.css">
+<script type="text/javascript" src="/js/login.js"></script>
 
 </head>
 <body>
@@ -31,6 +32,7 @@
 	    	</p>
 	    </form>
 	</div>
+
     <div class="item-form">
 	    <div class="niimi-body" th:each="item:${items}">
 	    	<table>
@@ -39,7 +41,7 @@
 	    				<img style="width:100px;" th:src="|/${item.image}|" />
 	    			</td>
 	    			<td th:text="|${item.name}|"style="width: 35%" class="priceAndName"></td>
-	    			<td th:text="|価格：${item.price} 円|" class="priceAndName"></td>
+	    			<td th:text="|${item.price} 円|" class="priceAndName"></td>
 	    		</tr>
 	    		<tr>
 	    			<td style="width: 40%">    			

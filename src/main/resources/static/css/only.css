@@ -1,0 +1,36 @@
+@charset "UTF-8";
+body{
+	background: url(/Whiteday2020-12.JPG) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family:'HelveticaNeue','Arial', sans-serif;
+  background-color: rgba(240,240,240,0.8); 
+  background-blend-mode: lighten;
+
+}
+
+.form{
+	
+	z-index:0;
+	width: 90%;
+	margin: 3px auto;
+	border:2px solid #696969;
+	border-radius: 10px;
+  	transition:all .1s ease-in;
+  	margin: auto;
+}
+h3{
+	border-bottom: solid 2px #333333;
+	font-size: 200%;
+	text-align: center;
+  	font-family:'HelveticaNeue','Arial', sans-serif;
+	color:#444;
+}
+.indate{
+		text-align: center;
+  	font-family:'HelveticaNeue','Arial', sans-serif;
+	color:#444;
+	
+}

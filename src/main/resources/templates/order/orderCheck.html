@@ -4,6 +4,11 @@
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 <meta charset="UTF-8">
 <title>購入ページ</title>
+<script type="text/javascript" src="/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<link rel="stylesheet" type="text/css" href="/css/itemShow.css">
+<script type="text/javascript" src="/js/login.js"></script>
+
 </head>
 <body>
 	<h3>購入情報を確認してください</h3>
@@ -37,21 +42,36 @@
 		<input type="submit" value="支払方法の変更">
 	</form>
 	<hr>
-	<div th:each="item:${items}">
-    	<table border="1">
-    		<tr>
-    			<td rowspan="2" th:text="${item.value.image}"></td>
-    			<td th:text="${item.value.name}"></td>
-    		</tr>
-    		<tr>
-    			<td th:text="${item.value.price}"></td>
-    		</tr>
-    	</table>
-    </div>
-	
 	<form action="/order/check">	
 		<input type="submit" value="完了">
 	</form>
+	
+	<hr>
+	 <div class="item-form">
+	    <div th:each="item:${items}">
+	    	<div class="niimi-body">
+	    	
+		    	<table>
+		    		<tr>
+	    			<td rowspan="2" style="width: 16%">
+	    				<img style="width:100px;" th:src="|/${item.value.image}|" />
+	    			</td>
+		    			<td th:text="${item.value.name}" class="priceAndName"></td>
+		    			<td th:text="|${item.value.price} 円|" class="priceAndName"></td>
+		    		</tr>
+		    		<tr>
+		    			<td>    			
+		 					<a th:href="|/cart/delete/${item.value.id}|">カートから削除</a>
+		     			</td>
+		    			<td>    			
+		 					<a th:href="|/item/detail/${item.value.id}|">もっと見る</a>
+		    			</td>
+		    		</tr>
+		    	</table>
+		    </div>
+	    </div>
+	 </div>
+	
 	
 </body>
 </html>

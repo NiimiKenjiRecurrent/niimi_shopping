@@ -4,29 +4,39 @@
 <link rel="stylesheet" type="text/css" href="cart.css">
 <meta charset="UTF-8">
 <title>ショッピングカート</title>
+<script type="text/javascript" src="/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<link rel="stylesheet" type="text/css" href="/css/itemShow.css">
 </head>
 <body>
 	<a href="/showItem">戻る</a>
-	<h3>現在入っている商品はこちら</h3>
-    <div th:each="item:${items}">
-    	<table border="1" class="flat-table">
-    		<tr>
-    			<td rowspan="2" th:text="${item.value.image}"></td>
-    			<td th:text="${item.value.name}" class="big"></td>
-    			<td th:text="${item.value.price}" class="big"></td>
-    		</tr>
-    		<tr>
-    			<td>    			
- 					<a th:href="|/cart/delete/${item.value.id}|">カートから削除</a>
-     			</td>
-    			<td>    			
- 					<a th:href="|/item/detail/${item.value.id}|">もっと見る</a>
-    			</td>
-    		</tr>
-    	</table>
-    </div>
-    <form action="/order">
-    	<input type="submit" value="購入">
+	<h1>現在入っている商品はこちら</h1>
+	 <div class="item-form">
+	    <div th:each="item:${items}">
+	    	<div class="niimi-body">
+	    	
+		    	<table>
+		    		<tr>
+	    			<td rowspan="2" style="width: 16%">
+	    				<img style="width:100px;" th:src="|/${item.value.image}|" />
+	    			</td>
+		    			<td th:text="${item.value.name}" class="priceAndName"></td>
+		    			<td th:text="|${item.value.price} 円|" class="priceAndName"></td>
+		    		</tr>
+		    		<tr>
+		    			<td>    			
+		 					<a th:href="|/cart/delete/${item.value.id}|">カートから削除</a>
+		     			</td>
+		    			<td>    			
+		 					<a th:href="|/item/detail/${item.value.id}|">もっと見る</a>
+		    			</td>
+		    		</tr>
+		    	</table>
+		    </div>
+	    </div>
+	 </div>
+    <form th:if="${items.size()!=0}" action="/order">
+    	<input type="submit"  class="login pull-right" value="購入">
     </form>
 </body>
 </html>

@@ -69,8 +69,8 @@ public class AccountController {
 				e.printStackTrace();
 			}
 			byte[] sha512_result = sha512.digest(password.getBytes());
-
-			if(accountList.getEmail().equals(email)&&accountList.getPassword().equals(String.format("%040x", new BigInteger(1, sha512_result)))) {
+			session.setAttribute("password", String.format("%040x", new BigInteger(1, sha512_result)));
+			if(accountList.getEmail().equals(email)&& accountList.getPassword().equals(String.format("%040x", new BigInteger(1, sha512_result)))) {
 				List<Item> itemList=itemRepository.findALLByOrderByIdAsc();
 				mv.addObject("items",itemList);
 				mv.setViewName("item/showItem");
@@ -125,7 +125,6 @@ public class AccountController {
 		
 		
 		
-		
 		Account account =new Account(userName, address, email, tell, name, String.format("%040x", new BigInteger(1, sha512_result)),addressNum);
 		if(!checkPassword(password)) {
 			mv.addObject("accountInfo", account);
@@ -136,6 +135,14 @@ public class AccountController {
 			mv.setViewName("account/signUp");
 			return mv;
 		}
+		List<Account> userList = accountRepository.findAllByEmail(email);
+		mv.addObject("users", userList);
+		
+		if(userList.size() != 0) {
+			mv.addObject("message", "登録済のユーザーです");
+			mv.setViewName("account/signup");
+		}
+		
 
 		accountRepository.saveAndFlush(account);
 
@@ -166,15 +173,14 @@ public class AccountController {
 			@RequestParam("tell")String tell,
 			@RequestParam("addressNum")String addressNum,
 			@RequestParam("address")String address,
-			@RequestParam("userName")String userName,
-			@RequestParam("passWord")String passWord) {
+			@RequestParam("userName")String userName) {
 		
 		// セッションからUseridを取得して、更新
 		
 //		accountRepository.deleteByEmail(email);
 //		accountRepository.flush();
 		
-		Account account=new Account((int)session.getAttribute("id"),userName,address,email,tell,name,passWord,addressNum);
+		Account account=new Account((int)session.getAttribute("id"),userName,address,email,tell,name,(String)session.getAttribute("password"),addressNum);
 		accountRepository.saveAndFlush(account);
 		
 		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));

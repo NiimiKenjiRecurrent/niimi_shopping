@@ -3,15 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>詳細ページ</title>
+<link rel="stylesheet" type="text/css" href="/css/only.css">
+
 </head>
 <body>
 	<a href="/showItem">topへ戻る</a>
-	<h2 th:text="${items.name}"></h2>
-	<img th:src="${items.image}">
-	<h3 th:text="${items.price}"></h3>
-	<p>説明文をかくデータベースに作成しないと</p>
+	<div class="form">
+		<h3 th:text="${items.name}"></h3>
+		<img th:src="${items.image}">
+		<h3 th:text="|${items.price} 円|"></h3>
+		<p>とってもおいしいです。<br>是非買ってね</p>
+	</div>
 	<form th:action="|/cart/add/${items.id}|">
-		<input type="submit" value="カートに追加">
+		<input type="submit" class="login pull-right" value="カートに追加">
 	</form>
 </body>
 </html>
