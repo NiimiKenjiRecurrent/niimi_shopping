@@ -8,11 +8,11 @@
 	<form action="/admin/add" method="post">	
 		<h3>追加したい商品情報を入力してください</h3>
 		<hr>
-		<p>商品名：<input type="text"name="name" /></p>
+		<p>商品名：<input type="text"name="name" required/></p>
 		<hr>
-		<p>価格：<input type="text" name="price" /></p>
+		<p>価格：<input type="text" name="price" required/></p>
 		<hr>
-		<p>画像：<input type="text" name="img"/></p>
+		<p>画像：<input type="text" name="img" required/></p>
 		<hr>		
 		<input type="submit" value="確定">	
 	</form>

@@ -8,9 +8,9 @@
 	<form th:action="|/changeItemInfo/${itemId}|" method="post">	
 		<h3>変更したい箇所を入力してください</h3>
 		<hr>
-		<p>商品名：<input th:value="${item.name}" name="name"></input></p>
+		<p>商品名：<input th:value="${item.name}" name="name" required></input></p>
 		<hr>
-		<p>価格：<input th:value="${item.price}"name="price"></input></p>
+		<p>価格：<input th:value="${item.price}"name="price" required></input></p>
 		<hr>
 		<input type="submit" value="確定">	
 	</form>

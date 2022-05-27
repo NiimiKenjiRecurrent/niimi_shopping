@@ -11,17 +11,17 @@
 		<form action="/changeMyPage" method="post">	
 			<h3>変更したい箇所を入力してください</h3>
 			<hr>
-			<p class="indate">氏名：<input th:value="${account.name}" name="name"></input></p>
+			<p class="indate">氏名：<input th:value="${account.name}" name="name" required></input></p>
 			<hr>
-			<p class="indate">E-mail：<input th:value="${account.email}"name=email></input></p>
+			<p class="indate">E-mail：<input type="email"th:value="${account.email}"name=email required></input></p>
 			<hr>
-			<p class="indate">電話番号：<input th:value="${account.tell}"name="tell"></input></p>
+			<p class="indate">電話番号：<input th:value="${account.tell}"name="tell" required></input></p>
 			<hr>
-			<p class="indate">郵便番号：<input th:value="${account.addressNum}"name="addressNum"></input></p>
+			<p class="indate">郵便番号：<input th:value="${account.addressNum}"name="addressNum" required></input></p>
 			<hr>
-			<p class="indate">住所：<input th:value="${account.address}"name="address"></input></p>
+			<p class="indate">住所：<input th:value="${account.address}"name="address" required></input></p>
 			<hr>
-			<p class="indate">UserName：<input th:value="${account.userName}"name="userName"></input></p>
+			<p class="indate">UserName：<input th:value="${account.userName}"name="userName" required></input></p>
 			<hr>
 			
 			<input type="submit" value="確定">	

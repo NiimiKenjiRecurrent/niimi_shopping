@@ -83,7 +83,7 @@ public class OrderController {
 			orderDetailRepository.saveAndFlush(detail);
 		}
 				
-		
+		session.removeAttribute("cart");
 //		Account account = new Account(id, addNum,address, email, tell, name, password);
 //		accountRepository.saveAndFlush(account);
 //
@@ -119,7 +119,22 @@ public class OrderController {
 	@RequestMapping("/addPay")
 	public ModelAndView addPay(ModelAndView mv,
 			@RequestParam("creNum")String creNum,
-			@RequestParam("secNum")int secNum) {
+			@RequestParam(name="secNum" ,defaultValue = "")Integer secNum) {
+		if(creNum==""||creNum==null||creNum.length()==0) {
+			Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
+			mv.addObject("account",accountInfo);
+			List<Pay> payList = payRepository.findByUserId((int)session.getAttribute("id"));
+			Pay newPay=new Pay((int)session.getAttribute("id"),creNum,secNum);
+			payList.add(newPay);
+			Cart cart = (Cart)session.getAttribute("cart");
+			mv.addObject("items", cart.getItems());
+			mv.addObject("flg","true");
+			mv.addObject("pays",payList);
+
+			mv.setViewName("order/orderCheck");
+			return mv;
+
+		}
 		Account accountInfo=accountRepository.findByEmail((String)session.getAttribute("name"));
 		mv.addObject("account",accountInfo);
 		List<Pay> payList = payRepository.findByUserId((int)session.getAttribute("id"));
